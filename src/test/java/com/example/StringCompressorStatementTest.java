@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
  * Null and empty inputs are assumed to return empty arrays, as implemented;
  * no exception is expected for these or any of the valid char[] inputs below.
  */
-class AIStringCompressorTest {
+class StringCompressorStatementTest {
     private final StringCompressor compressor = new StringCompressor();
 
     @Test
