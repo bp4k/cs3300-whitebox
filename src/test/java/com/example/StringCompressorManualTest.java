@@ -98,53 +98,74 @@ public class StringCompressorManualTest {
         assertArrayEquals(expected, actual);
     }
 
+    // Shuo Zhang's test inputs
     @Test
-    void runOfTwoAppendsCounts() {
-        // Jake
+    void separatedSRunCountsOnlyTrailingMatches() {
+        char[] input = "szsss".toCharArray();
+        char[] expected = "szs3".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void runOfNineUsesOneDigit() {
-        // Jake
+    void leadingRunStopsAtDifferentCharacter() {
+        char[] input = "ssssz".toCharArray();
+        char[] expected = "s4z".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void runOfTenUsesTwoDigit() {
-        // Jake
+    void trailingRunEndsAtArrayBoundary() {
+        char[] input = "szzzz".toCharArray();
+        char[] expected = "sz4".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void mutlipleRepeatedRunsHaveIndependentCounts() {
-        // Jake
+    void fourDistinctLettersRetainOrder() {
+        char[] input = "shuo".toCharArray();
+        char[] expected = "shuo".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void digitCharactersCompressCorrect() {
-        // Jake
+    void alternatingLettersStaySeparate() {
+        char[] input = "szsz".toCharArray();
+        char[] expected = "szsz".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void whitespaceCharactersCompressCorrect() {
-        // Jake
+    void nullInputProducesZeroLengthArray() {
+        char[] input = null;
+        char[] expected = new char[0];
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void punctuationCharactersCompressCorrect() {
-        // Jake
+    void singleSRemainsUncounted() {
+        char[] input = "s".toCharArray();
+        char[] expected = "s".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void uppercaseAndLowercaseRemainDistinct() {
-        // Jake
+    void twoDifferentLettersRetainOrder() {
+        char[] input = "sz".toCharArray();
+        char[] expected = "sz".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void nonAsciiCharactersCompressCorrect() {
-        // Jake
+    void multiplePairsInNameAreCountedIndependently() {
+        char[] input = "shuuoozhaang".toCharArray();
+        char[] expected = "shu2o2zha2ng".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 
     @Test
-    void compressLeavesInputUnchanged() {
-        // Jake
+    void nonAdjacentHCharactersStaySeparate() {
+        char[] input = "shuozhang".toCharArray();
+        char[] expected = "shuozhang".toCharArray();
+        assertArrayEquals(expected, compressor.compress(input));
     }
 }
