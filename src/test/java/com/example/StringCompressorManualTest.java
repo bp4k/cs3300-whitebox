@@ -135,9 +135,9 @@ public class StringCompressorManualTest {
     }
 
     @Test
-    void nullInputProducesZeroLengthArray() {
-        char[] input = null;
-        char[] expected = new char[0];
+    void runOfTenUsesTwoDigits() {
+        char[] input = "ssssssssss".toCharArray();
+        char[] expected = "s10".toCharArray();
         assertArrayEquals(expected, compressor.compress(input));
     }
 
